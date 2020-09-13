@@ -1,0 +1,86 @@
+<head>
+    <title>Page Title</title>
+</head>
+<body>
+
+</body>
+</html><!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="Style.css">
+
+    <meta charset="UTF-8">
+    <meta name="description" content="multiple choice">
+    <meta name="keywords" content="HTML,CSS,,JavaScript">
+    <meta name="author" content="lina capenexis">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<meta charset="UTF-8">
+<style>
+div#test{ border:#000 1px solid; padding:10px 40px 40px 40px; }
+</style>
+<script>
+var pos = 0, test, test_status, question, choice, choices, chA, chB, chC, correct = 0;
+var questions = [
+
+               [ "Precious.... her teeth before breakfast every morning.?", "brush", "is brushing", "brushes", "C" ],
+    [ "Sorry, you can't borrow my pencil,I..... it myself.?", "using", "am using", "uses","used", "B" ],
+   [ "I think I....a new calculator.This one is not working properly any more.?", "need", "needing", "needs", "A" ],
+   [ "What time.....?", "the train leaves", "is the train leaving", "does the train leaves", "B" ],
+               [ "I.....for my pen.Have you seen it.?", "look", "looked", "am looking", "C" ],
+   [ "You can keep my ipod if you like.I.... it anymore.?", "don't use", "does'nt use", "am not using", "C" ],
+   [ "The phone.....can you answer it,please.?", "ring", "rang", "is ringing", "C" ],
+               [ "Weather report:it's seven o'clock in Polokwane and it's.....?", " wind ", "windy", "it's windy", "C" ],
+   [ "How many students.....from another province in your class.?", "comes", "come", "came", "B" ],
+   [ "Don't make noise.Karabo.....to study for her Maths Test!?", "try", "tries", "is trying", "C" ],
+
+];
+
+function _(x){
+   return document.getElementById(x);
+}
+
+function renderQuestion(){
+   test = _("test");
+   if(pos >= questions.length){
+      test.innerHTML = "<h2>You got "+correct+" of "+questions.length+" questions correct</h2>";
+      _("test_status").innerHTML = "Test Completed";
+      pos = 0;
+      correct = 0;
+      return false;
+   }
+   _("test_status").innerHTML = "Question "+(pos+1)+" of "+questions.length;
+   question = questions[pos][0];
+   chA = questions[pos][1];
+   chB = questions[pos][2];
+   chC = questions[pos][3];
+   test.innerHTML = "<h3>"+question+"</h3>";
+   test.innerHTML += "<input type='radio' name='choices' value='A'> "+chA+"<br>";
+   test.innerHTML += "<input type='radio' name='choices' value='B'> "+chB+"<br>";
+   test.innerHTML += "<input type='radio' name='choices' value='C'> "+chC+"<br><br>";
+   test.innerHTML += "<button onclick='checkAnswer()'>Submit Answer</button>";
+}
+
+function checkAnswer(){
+   choices = document.getElementsByName("choices");
+   for(var i=0; i<choices.length; i++){
+      if(choices[i].checked){
+         choice = choices[i].value;
+      }
+   }
+   if(choice == questions[pos][4]){
+      correct++;
+   }
+   pos++;
+   renderQuestion();
+}
+
+window.addEventListener("load", renderQuestion, false);
+</script>
+</head>
+<body>
+<h2 id="test_status"></h2>
+<div id="test"></div>
+</body>
+</html>
+

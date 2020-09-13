@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="Style.css"/>
+</head>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Science</title>
+</head>
+<body>
+
+</body>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+div#test{ border:#000 1px solid; padding:10px 40px 40px 40px; }
+</style>
+    <script>
+var pos = 0, test, test_status, question, choice, choices, chA, chB, chC, correct = 0;
+var questions = [
+
+        [ "Which of the following does not show water shortage?", "Taps running dry.", " Long queues for getting water.","A family gets three buckets of water per person per day.", "C" ],
+        [ "Seas and oceans are full of water on earth. However, a very small percentage of water present on earth is available for us. This percentage is roughly?", "0.006%.", " 0.06%.", "0.6%.","A" ],
+	[ "A man digging the ground near a water body found that the soil was moist. As he kept digging deeper and deeper he reached a level where all the spaces between particles of soil and gaps between rocks were filled with water. The upper limit of this layer is called?", "water level.", "water table.", "groundwater.","B" ],
+	[ "Which of the following is a way to use water economically?","Rainwater harvesting", " Drip irrigation","Infiltration", "B" ],
+               [ "Water cycle does not involve which of the following?", "Evaporation", "Formation of clouds", "Rainwater harvesting", "C" ],
+	[ " On which of the following day is World Water Day observed?", "22 March", "14 November", "21 December", "A" ],
+	[ "The amount of water recommended by the United Nations for drinking, washing, cooking and maintaining proper hygiene per person per day is a minimum of?", "15 litres", " 30 litres", "50 litres", "C" ],
+               [ "Which of the following inhibits the seepage of rainwater into the ground??", " A pukka floor", "Playground", "Forest land", "A" ],
+	[ "Every Drop Counts” is a slogan related to?", "counting of drops of any liquid.", "importance of counting.", " importance of water.", "C" ],
+    [ "Which of the following is not a way to conserve water?", "replace", "reduce", "reuse", "A" ],
+
+];
+
+function _(x){
+	return document.getElementById(x);
+}
+
+function renderQuestion(){
+	test = _("test");
+	if(pos >= questions.length){
+		test.innerHTML = "<h2>You got "+correct+" of "+questions.length+" questions correct</h2>";
+		_("test_status").innerHTML = "Test Completed";
+		pos = 0;
+		correct = 0;
+		return false;
+	}
+	_("test_status").innerHTML = "Question "+(pos+1)+" of "+questions.length;
+	question = questions[pos][0];
+	chA = questions[pos][1];
+	chB = questions[pos][2];
+	chC = questions[pos][3];
+	test.innerHTML = "<h3>"+question+"</h3>";
+	test.innerHTML += "<input type='radio' name='choices' value='A'> "+chA+"<br>";
+	test.innerHTML += "<input type='radio' name='choices' value='B'> "+chB+"<br>";
+	test.innerHTML += "<input type='radio' name='choices' value='C'> "+chC+"<br><br>";
+	test.innerHTML += "<button onclick='checkAnswer()'>Submit Answer</button>";
+}
+
+function checkAnswer(){
+	choices = document.getElementsByName("choices");
+	for(var i=0; i<choices.length; i++){
+		if(choices[i].checked){
+			choice = choices[i].value;
+		}
+	}
+	if(choice == questions[pos][4]){
+		correct++;
+	}
+	pos++;
+	renderQuestion();
+}
+
+window.addEventListener("load", renderQuestion, false);
+</script>
+</head>
+<body>
+<h2 id="test_status"></h2>
+<div id="test"></div>
+</body>
+</html>
